@@ -15,12 +15,25 @@ CastleHelpFrameDraw_Loop equ 0x542ED8
 ButlerMenuCreateBind equ 0x44D5B8
 MoveUnitRelianceMenuCheck equ 0x498f58
 MoveUnitLinkMenuCheck equ 0x498f60
+EnterSeq_Tutorial equ 0x47f520
+EnterSeq_TutorialNotice equ 0x47f340
+EnterSeq_TutorialAfterLilith equ 0x47f424
 
 ; Functions/Used Code Blocks
 MoveUnitAmiiboCase equ 0x498E78
 
 ; These changes disable and hide unneeded My Castle features.
 ; In particular, this disables everything related to customization.
+
+; Disable the tutorial.
+.org EnterSeq_Tutorial
+    nop
+    nop
+    nop
+.org EnterSeq_TutorialNotice
+    nop
+.org EnterSeq_TutorialAfterLilith
+    bx lr
 
 .org MoveUnitRelianceMenuCheck
     ; Disable the bookshelf.
