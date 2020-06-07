@@ -3,6 +3,7 @@
 
 ; Hooks
 CastleLowerDrawer_DrawButtons equ 0x200BF4
+CastleLowerDrawer_Draw_DrawTimeCall equ 0x200c50
 DrawCastleInfo_CastleName equ 0x2002bc
 DrawCastleInfo_DVPText equ 0x200424
 DrawCastleInfo_DVPIcon equ 0x200458
@@ -70,6 +71,9 @@ MoveUnitAmiiboCase equ 0x498E78
 .org DrawCastleInfo_DVPIcon
     nop
 .org DrawCastleInfo_DVPBar
+    nop
+
+.org CastleLowerDrawer_Draw_DrawTimeCall
     nop
 
 .org SetupCastleInfo_AfterNameItem
