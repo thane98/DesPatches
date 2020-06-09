@@ -27,3 +27,8 @@ combined:
 	@echo Assembled ScriptedConversations.s
 
 	@echo Build completed.
+
+cmvmextended:
+	@copy codebase.bin code.bin
+	@armips CMVMextended.s
+	@echo Assembled CMVMextended.s

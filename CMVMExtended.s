@@ -13,6 +13,7 @@ MainSeqInitialize_Resume equ 0x1B61E4
 ; Functions
 Person_GetByPID equ 0x44A6DC
 Event_ScriptLoad equ 0x422398
+Chapter_Get equ 0x4D95C8
 Castle_Get equ 0x44544C
 Castle_GetData equ 0x44545C
 Castle_People_GetByPerson equ 0x492A5C
@@ -40,7 +41,7 @@ SizeLimit equ 0x178
 CustomCMVMFunc:
     push {r0-r7, lr}
     bl PopCMVMStack
-    cmp r0, #3
+    cmp r0, #4
     bge CustomCMVMFuncComplete
     adr r1, CustomCMVMFuncTable
     ldr r0, [r1, r0, LSL 2]
@@ -54,6 +55,7 @@ CustomCMVMFuncTable:
     .word CastleSetDoneTalking
     .word CastleGetDoneTalking
     .word SetMapBGM
+    .word ChapterSetNext
 
 CastleSetDoneTalking:
     bl PopCMVMStack
@@ -91,6 +93,24 @@ SetMapBGM:
     bl PopCMVMStack
     bl MapSetBGM
     bl MapUpdateBGM
+    b CustomCMVMFuncComplete
+
+
+ChapterSetNext:
+    bl PopCMVMStack
+    mov r5, r0
+    bl PopCMVMStack
+    mov r6, r0
+    mov r0, #1
+    bl IncCMVMPC
+
+    mov r0, r6
+    bl Chapter_Get
+    cmp r0, #0
+    beq CustomCMVMFuncComplete
+    str r5, [r0, #0xA]
+    str r5, [r0, #0xB]
+    str r5, [r0, #0xC]
     b CustomCMVMFuncComplete
 
 
